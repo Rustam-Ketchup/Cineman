@@ -1,6 +1,26 @@
 <template>
   <div class="container cineman">
-    <h1 class="cineman__title">cineman</h1>
+    <Search v-if="getFilmSelected === ''" />
+    <div v-else class="cineman-result">
+      <h1 class="cineman-result__title">You select film: "{{ getFilmSelected }}"</h1>
+      <button class="cineman-button" @click="clearFilm">Clear search</button>
+
+      <div class="cineman-wrapper">
+        <div
+          v-for="(post, index) in getFilmsResults"
+          :key="index"
+          class="blog__post post-preview"
+        >
+          <div class="post-thumbnail"></div>
+          <div class="post-content">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.description }}</p>
+            <p>{{ post.platform }}</p>
+            <p>{{ post.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,13 +31,19 @@
     Watch
   } from "nuxt-property-decorator";
   import { namespace } from "vuex-class";
+  import Search from "~/components/Search.vue";
 
   const cinemanStore = namespace('cineman');
 
   @Component({
+    components: {
+      Search
+    }
   })
   export default class IndexPage extends Vue {
-    @cinemanStore.Action private loadFilms: any;
+    @cinemanStore.Action private clearFilm: any;
+    @cinemanStore.Getter private getFilmSelected: any;
+    @cinemanStore.Getter private getFilmsResults: any;
 
   }
 </script>
@@ -34,11 +60,19 @@
   }
 
   .cineman {
+    &-result {
+      width: 90%;
+      &__title {
+        font-size: 4rem;
+      }
+    }
+
     &-wrapper {
+      margin-top: 2rem;
       display: grid;
-      grid-template-columns: 33% 33% 33%;
-      grid-gap: 1rem;
-      width: 60%;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 2rem;
+      width: 100%;
 
       @media screen and (max-width: 1360px) {
         grid-template-columns: 50% 50%;
@@ -62,6 +96,13 @@
       padding: 1rem;
       border: 2px solid #7f828b;
       border-radius: 1rem;
+    }
+
+    &-button {
+      padding: 1rem 2rem;
+      margin: 2rem;
+      border: 1px solid;
+      font-size: 2rem;
     }
   }
 

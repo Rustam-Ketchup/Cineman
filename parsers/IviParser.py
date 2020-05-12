@@ -7,7 +7,7 @@ def IviFind(name):
     print(url)
     response = get(url)
     html_soup = BeautifulSoup(response.text, 'html.parser')
-    movies = html_soup.find_all('a', class_ = 'nbl-slimPosterBlock')
+    movies = html_soup.find_all('a', class_ = 'nbl-slimPosterBlock', limit=2)
 
     result =[]
     for mv in movies:
@@ -20,11 +20,11 @@ def IviFind(name):
         else:
             movie_obj['rating']=rating.text
 
-        price = mv_html_soup.find('span', class_='nbl-button__primaryText')
+        price = mv_html_soup.find('del', class_='nbl-button__strikedText')
         if price is None:
             movie_obj['price'] = '-'
         else:
-            movie_obj['price'] = price.text
+            movie_obj['price'] = f"От {price.text} ₽"
         
         result.append(movie_obj);
 
@@ -41,4 +41,4 @@ def IviFind(name):
         print(movie_name)
     return '''
 
-IviFind("Матрица 2")
+IviFind("Матрица")

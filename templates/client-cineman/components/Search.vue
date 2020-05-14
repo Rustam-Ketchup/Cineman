@@ -35,7 +35,7 @@
   @Component({
   })
   export default class Search extends Vue {
-    @cinemanStore.Mutation private selectFilm: any;
+    @cinemanStore.Action private selectingFilm: any;
 
     private searchInput = '';
     private startTyping = false;
@@ -48,7 +48,7 @@
     ];
 
     private clickVariantFilm(film: string) {
-      this.selectFilm(film);
+      this.selectingFilm(film);
     }
   }
 </script>

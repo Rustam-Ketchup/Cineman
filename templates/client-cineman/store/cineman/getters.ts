@@ -8,8 +8,8 @@ const getters = {
   getFilmSelected(state: any) {
     return state.selectedFilm
   },
-  getFilmsResults(state: any) {
-    return state.results;
+  getFilmPlatforms(state: any) {
+    return state.platforms;
   }
 };
 

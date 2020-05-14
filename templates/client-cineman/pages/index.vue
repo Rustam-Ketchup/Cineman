@@ -1,22 +1,24 @@
 <template>
   <div class="container cineman">
+
     <Search v-if="getFilmSelected === ''" />
+
     <div v-else class="cineman-result">
       <h1 class="cineman-result__title">You select film: "{{ getFilmSelected }}"</h1>
       <button class="cineman-button" @click="clearFilm">Clear search</button>
 
       <div class="cineman-wrapper">
         <div
-          v-for="(post, index) in getFilmsResults"
+          v-for="(post, index) in getFilmPlatforms"
           :key="index"
           class="blog__post post-preview"
         >
           <div class="post-thumbnail"></div>
           <div class="post-content">
-            <h1>{{ post.title }}</h1>
+            <h1>{{ post.platform }}</h1>
+            <small>{{ post.price }}</small>
+            <h3>{{ post.title }}</h3>
             <p>{{ post.description }}</p>
-            <p>{{ post.platform }}</p>
-            <p>{{ post.price }}</p>
           </div>
         </div>
       </div>
@@ -43,7 +45,7 @@
   export default class IndexPage extends Vue {
     @cinemanStore.Action private clearFilm: any;
     @cinemanStore.Getter private getFilmSelected: any;
-    @cinemanStore.Getter private getFilmsResults: any;
+    @cinemanStore.Getter private getFilmPlatforms: any;
 
   }
 </script>

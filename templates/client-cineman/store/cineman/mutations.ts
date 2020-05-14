@@ -10,6 +10,9 @@ const mutations = {
   },
   selectFilm(state: any, film: string) {
     state.selectedFilm = film;
+  },
+  setPlatforms(state: any, platforms: Array<any>) {
+    state.platforms = platforms;
   }
 };
 

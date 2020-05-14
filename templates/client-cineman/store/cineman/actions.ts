@@ -35,7 +35,9 @@ const actions = {
   selectingFilm({commit}: {commit: any}, filmName: string) {
     commit('selectFilm', filmName);
 
-    axios.post(`${API_PATH}/get-serch-results?search=${filmName}`)
+    axios.post(`${API_PATH}/get-serch-results`, {
+      film: filmName,
+    })
       .then((response) => {
         // commit('setPlatforms', response.data);
         commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);

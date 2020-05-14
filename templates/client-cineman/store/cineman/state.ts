@@ -3,7 +3,6 @@ const state = (): any => ({
   filmLoaded: false,
   selectedFilm: '',
   results: [
-    //asdsdsadad
     {
       title: 'FILM_TITLE',
       description: 'FILM_DESCRIPTION',

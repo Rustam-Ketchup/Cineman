@@ -41,10 +41,10 @@
     private startTyping = false;
 
     private searchedVariants = [
-      'Film1',
-      'Film2',
-      'Film3',
-      'Film4',
+      'Матрица 3',
+      'Шрек 2',
+      'Побег из шоушенка',
+      'Реальные упыри',
     ];
 
     private clickVariantFilm(film: string) {

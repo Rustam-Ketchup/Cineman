@@ -2,7 +2,7 @@ from imdb import IMDb
 from flask import Flask, request, render_template
 from kinopoisk.movie import Movie
 import json
-
+from parsers import IviParser, MegogoParser
 app = Flask(__name__)
 
 
@@ -17,13 +17,17 @@ def index():
     print(matrix.keys())
     return render_template('index.html', title='', description='', year='', critic='')
 
+
 @app.route('/api/get-search-results/', methods=['post'])
 def api_imdb():
     name = request.data.film
     ia = IMDb()
     results = ia.search_movie(name)
     data = []
-
+    ivi = IviParser()
+    megogo = MegogoParser()
+    data.append(ivi.IviFind(name))
+    data.append(megogo.MegogoFind(name))
     for result in results:
         ia.update(result)
         movie = {}

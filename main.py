@@ -1,6 +1,5 @@
 from imdb import IMDb
-from flask import Flask, request, render_template
-from flask import *
+from flask import Flask, request, render_template, Response
 from kinopoisk.movie import Movie
 import json
 from parsers import IviParser, MegogoParser
@@ -30,6 +29,7 @@ def index():
 
 
 @app.route('/api/get-search-results/', methods=['post'])
+@cross_origin(origin='localhost',headers=['Content- Type','application/json'])
 def api_imdb():
     name = request.data.film
     ia = IMDb()

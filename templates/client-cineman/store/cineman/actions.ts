@@ -35,16 +35,24 @@ const actions = {
   selectingFilm({commit}: {commit: any}, filmName: string) {
     commit('selectFilm', filmName);
 
-    axios.post(`${API_PATH}/get-serch-results`, {
-      film: filmName,
+    axios({
+      url: `${API_PATH}/get-serch-results`,
+      method: "post",
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        film: filmName,
+      }
     })
       .then((response) => {
-        // commit('setPlatforms', response.data);
-        commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
+        commit('setPlatforms', response.data);
+        // commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
       })
       .catch((err) => {
-        // console.log('Error when loading cinema-platforms!', err);
-        commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
+        console.log('Error when loading cinema-platforms!');
+        // commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
       })
   }
 };

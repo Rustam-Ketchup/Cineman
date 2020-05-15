@@ -1,13 +1,20 @@
 from imdb import IMDb
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Response
 from kinopoisk.movie import Movie
 import json
 from parsers import IviParser, MegogoParser
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
+config = {
+  'ORIGINS': [
+    'http://localhost:3000',  # Nuxt
+    'http://127.0.0.1:3000',  # Nuxt
+  ],
+}
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={ r'/*': {'origins': config['ORIGINS']}}, supports_credentials=True)
+
 
 @app.route('/', methods=['post', 'get'])
 def index():
@@ -22,6 +29,7 @@ def index():
 
 
 @app.route('/api/get-search-results/', methods=['post'])
+@cross_origin(origin='localhost',headers=['Content- Type','application/json'])
 def api_imdb():
     name = request.data.film
     ia = IMDb()
@@ -39,8 +47,8 @@ def api_imdb():
         if 'votes' in result.keys(): movie['votes'] = result['votes']
         if 'full-size cover url' in result.keys(): movie['image'] = result['full-size cover url']
         data.append(movie)
-    return json.dumps(data) # str(results)
 
+    return Response(headers={'Access-Control-Allow-Origin':'*', 'Content-Type': 'application/json'}, status=201, data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)

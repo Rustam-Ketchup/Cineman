@@ -4,10 +4,10 @@ services:
   cineman-client:
     build:
       context: .
-      dockerfile: templates/client-cineman/client.Dockerfile
+      dockerfile: templates/client-cineman/Dockerfile
     container_name: cineman-client
     ports:
-      - 8080:8080
+      - 3000:3000
 #    links:
 #      - cineman-server
 

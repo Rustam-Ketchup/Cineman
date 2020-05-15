@@ -1,5 +1,3 @@
-// @ts-ignore
-// @ts-ignore
 export default {
   mode: 'universal',
   /*
@@ -19,7 +17,7 @@ export default {
     ]
   },
   env: {
-    apiBaseUri: process.env.API_URL || "http://localhost:8000"
+    apiBaseUri: process.env.API_URL || "http://localhost:5000"
   },
   /*
   ** Customize the progress-bar color

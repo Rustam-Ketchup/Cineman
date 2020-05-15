@@ -3,8 +3,11 @@ from flask import Flask, request, render_template
 from kinopoisk.movie import Movie
 import json
 from parsers import IviParser, MegogoParser
-app = Flask(__name__)
+from flask_cors import CORS
 
+
+app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/', methods=['post', 'get'])
 def index():

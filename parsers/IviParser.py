@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from requests import get
 import urllib.parse
 
+
 def IviFind(name):
     url = f"https://www.ivi.ru/search/?q={urllib.parse.quote(name)}"
     print(url)
@@ -28,8 +29,6 @@ def IviFind(name):
         
         result.append(movie_obj);
 
-
-    print(result)
     return result
     '''for a in movies:
         movie_name = html_soup.find_all('div', class_='nbl-slimPosterBlock__title')
@@ -40,5 +39,3 @@ def IviFind(name):
         #movie_name= html_soup.find('video-info')['data-title']
         print(movie_name)
     return '''
-
-IviFind("Матрица")

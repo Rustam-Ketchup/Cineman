@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from requests import get
 import urllib.parse
 
+
 def MegogoFind(name):
     url = f"https://megogo.ru/ru/search-extended?q={urllib.parse.quote(name)}"
     print(url)
@@ -23,10 +24,7 @@ def MegogoFind(name):
         
         result.append(movie_obj)
 
-    print(result)
-    return
-
-MegogoFind("Матрица")
+    return result
 
 
 #https://megogo.ru/ru/search-extended?q=%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0

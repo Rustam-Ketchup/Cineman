@@ -8,19 +8,21 @@
       <button class="cineman-button" @click="clearFilm">Clear search</button>
 
       <div class="cineman-wrapper">
-        <div
+        <a
           v-for="(post, index) in getFilmPlatforms"
           :key="index"
           class="blog__post post-preview"
+          :href="post.link"
         >
           <div class="post-thumbnail"></div>
           <div class="post-content">
             <h1>{{ post.platform }}</h1>
-            <small>{{ post.price }}</small>
+            <small>{{ post.price }}$</small>
+            <p class="rating">rating: {{ post.rating }}</p>
             <h3>{{ post.title }}</h3>
-            <p>{{ post.description }}</p>
+            <p class="description">{{ post.description }}</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -63,9 +65,10 @@
 
   .cineman {
     &-result {
-      width: 90%;
+      width: 80%;
       &__title {
         font-size: 4rem;
+        margin-top: 2%;
       }
     }
 
@@ -73,7 +76,8 @@
       margin-top: 2rem;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 2rem;
+      column-gap: 11rem;
+      row-gap: 4rem;
       width: 100%;
 
       @media screen and (max-width: 1360px) {
@@ -101,10 +105,11 @@
     }
 
     &-button {
-      padding: 1rem 2rem;
+      padding: 1rem 5rem;
       margin: 2rem;
-      border: 1px solid;
-      font-size: 2rem;
+      border: none;
+      font-size: 2.25rem;
+      background-color: #c4c4c4;
     }
   }
 
@@ -131,22 +136,48 @@
   }
 
   .post-preview {
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 2px #ccc;
     background-color: white;
+    text-decoration: none;
+    color: inherit;
   }
 
   .post-thumbnail {
     width: 100%;
-    height: 200px;
+    height: 400px;
     background-position: center;
     background-size: cover;
     background-image: url("../assets/thumb.jpg");
   }
 
   .post-content {
-    padding: 10px;
+    padding: 15px;
     text-align: center;
+
+    & > * {
+      margin-bottom: .5rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+    small {
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .rating {
+      font-size: 1.1rem;
+      font-weight: 200;
+    }
+
+    h3 {
+      font-size: 2.25rem;
+    }
+
+    .description {
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
   }
 
   .post-bottom {

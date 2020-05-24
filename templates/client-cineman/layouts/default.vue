@@ -17,6 +17,12 @@
     box-sizing: border-box;
   }
 
+  @media screen and (max-width: 1850px) {
+    html {
+      font-size: 12px;
+    }
+  }
+
   *,
   *:before,
   *:after {

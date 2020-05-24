@@ -1,23 +1,21 @@
 <template>
   <div class="search">
     <i class="fas fa-search"></i>
-    <label>
-      <input
-        type="text"
-        class="search__input"
-        placeholder="Найди где смотреть с нами"
-        @input="startTyping = true"
-        v-model="searchInput"
-      >
-    </label>
+    <input
+      type="text"
+      class="search__input"
+      placeholder="Найди где смотреть с нами..."
+      @input="onSearchInput($event.target.value)"
+      v-model="searchInput"
+    >
     <div v-if="startTyping" class="search__dropdown">
       <span
         class="search__variant"
-        v-for="(variant, index) in searchedVariants"
+        v-for="(variant, index) in getSearchResults"
         :key="index"
         @click="clickVariantFilm(variant)"
       >
-        {{ variant }}
+        {{ variant.title }}
       </span>
     </div>
   </div>
@@ -36,19 +34,26 @@
   })
   export default class Search extends Vue {
     @cinemanStore.Action private selectingFilm: any;
+    @cinemanStore.Action private searchFilm: any;
+    @cinemanStore.Getter private getSearchResults: any;
 
     private searchInput = '';
     private startTyping = false;
 
-    private searchedVariants = [
-      'Матрица 3',
-      'Шрек 2',
-      'Побег из шоушенка',
-      'Реальные упыри',
-    ];
+    private clickVariantFilm(film: any) {
+      if (film && film.title) this.selectingFilm(film.title);
+      else this.selectingFilm(film);
+    }
 
-    private clickVariantFilm(film: string) {
-      this.selectingFilm(film);
+    private onSearchInput(film: string) {
+      if (this.searchInput === '') this.startTyping = false;
+
+      else {
+        this.startTyping = true;
+
+        // start action search
+        this.searchFilm(film);
+      }
     }
   }
 </script>
@@ -61,6 +66,7 @@
     justify-content: space-around;
     padding: .5rem 5rem;
     position: relative;
+    width: 70%;
 
     .fa-search {
       font-size: 9rem;
@@ -72,6 +78,7 @@
       outline: none;
       font-size: 4rem;
       padding: 4rem;
+      width: 100%;
     }
 
     &__dropdown {

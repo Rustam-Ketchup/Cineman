@@ -77,8 +77,13 @@
       background-color: inherit;
       outline: none;
       font-size: 4rem;
+      font-style: italic;
+      font-weight: 300;
       padding: 4rem;
       width: 100%;
+      &::placeholder {
+        font-weight: 300;
+      }
     }
 
     &__dropdown {
@@ -96,6 +101,9 @@
     &__variant {
       cursor: pointer;
       padding: 1rem;
+      font-size: 2.25rem;
+      font-weight: 600;
+      font-style: italic;
     }
   }
 </style>

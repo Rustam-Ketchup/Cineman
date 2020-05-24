@@ -10,6 +10,9 @@ const getters = {
   },
   getFilmPlatforms(state: any) {
     return state.platforms;
+  },
+  getSearchResults(state: any) {
+    return state.searchResults;
   }
 };
 

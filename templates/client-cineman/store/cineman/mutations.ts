@@ -13,7 +13,10 @@ const mutations = {
   },
   setPlatforms(state: any, platforms: Array<any>) {
     state.platforms = platforms;
-  }
+  },
+  setSearchResults(state: any, results: Array<any>) {
+    state.searchResults = results;
+  },
 };
 
 export default mutations;

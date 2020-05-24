@@ -3,6 +3,7 @@ const state = (): any => ({
   filmLoaded: false,
   selectedFilm: '',
   platforms: [],
+  searchResults: [],
 });
 
 export default state;

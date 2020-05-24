@@ -1,15 +1,13 @@
 <template>
   <div class="search">
     <i class="fas fa-search"></i>
-    <label>
-      <input
-        type="text"
-        class="search__input"
-        placeholder="Найди где смотреть с нами"
-        @input="onSearchInput($event.target.value)"
-        v-model="searchInput"
-      >
-    </label>
+    <input
+      type="text"
+      class="search__input"
+      placeholder="Найди где смотреть с нами..."
+      @input="onSearchInput($event.target.value)"
+      v-model="searchInput"
+    >
     <div v-if="startTyping" class="search__dropdown">
       <span
         class="search__variant"
@@ -68,6 +66,7 @@
     justify-content: space-around;
     padding: .5rem 5rem;
     position: relative;
+    width: 70%;
 
     .fa-search {
       font-size: 9rem;
@@ -79,6 +78,7 @@
       outline: none;
       font-size: 4rem;
       padding: 4rem;
+      width: 100%;
     }
 
     &__dropdown {

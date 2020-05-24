@@ -88,7 +88,6 @@ const actions = {
   searchFilm({commit}: {commit: any}, filmName: string) {
     axios.get(`${API_FILM}/search/movie?api_key=${API_KEY}&language=${API_LANGUAGE}&query=${filmName}`)
       .then((response) => {
-        console.log(response.data.results);
         commit('setSearchResults', response.data.results);
         // commit('setSearchResults', MY_GOOD_SEARCH_RESULTS_MOCK);
       })

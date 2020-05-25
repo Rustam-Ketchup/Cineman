@@ -13,7 +13,8 @@ const getters = {
   },
   getSearchResults(state: any) {
     if (state.searchResults && state.searchResults.length === 0) return [{
-      title: 'Results not found',
+      title: 'Results not found, press ENTER for search',
+      notClick: true,
     }];
 
     return state.searchResults;

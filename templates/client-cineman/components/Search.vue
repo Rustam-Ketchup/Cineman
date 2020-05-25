@@ -6,6 +6,7 @@
       class="search__input"
       placeholder="Найди где смотреть с нами..."
       @input="onSearchInput($event.target.value)"
+      @keyup.enter="clickVariantFilm(searchInput)"
       v-model="searchInput"
     >
     <div v-if="startTyping" class="search__dropdown">
@@ -41,6 +42,8 @@
     private startTyping = false;
 
     private clickVariantFilm(film: any) {
+      if (film.notClick) return;
+
       if (film && film.title) this.selectingFilm(film.title);
       else this.selectingFilm(film);
     }

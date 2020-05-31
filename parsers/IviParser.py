@@ -21,6 +21,7 @@ def IviFind(name):
         else:
             movie_obj['rating']=rating.text
 
+        # Todo: Help parse src from <img> poster
         image = mv_html_soup.find('div', class_='nbl-poster__image')
         if image is None:
             movie_obj['image_url']='-'

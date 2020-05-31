@@ -1,25 +1,10 @@
-from imdb import IMDb
-from flask import Flask, request, render_template, Response
-from kinopoisk.movie import Movie
+from flask import Flask, request
 import json
 from parsers import IviParser, MegogoParser
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-
-
-@app.route('/', methods=['post', 'get'])
-def index():
-    ia = IMDb()
-    results = ia.search_movie('the matrix')
-    for result in results:
-        print(result.movieID, result)
-    matrix = results[0]
-    ia.update(matrix)
-    print(matrix.keys())
-    return render_template('index.html', title='', description='', year='', critic='')
-
 
 @app.route('/api/get-serch-results/', methods=['post', "get", 'options'])
 @cross_origin()

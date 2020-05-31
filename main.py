@@ -24,35 +24,22 @@ def index():
 @app.route('/api/get-serch-results/', methods=['post', "get", 'options'])
 @cross_origin()
 def api_imdb():
-    print(request.data)
     name = json.loads(request.data.decode('utf8').replace("'", '"'))
-    print(name)
     name = name["film"]
 
-    # name = "matrix"
-    ia = IMDb()
-    results = ia.search_movie(name)
     data = []
-    # ivi = IviParser()
-    # megogo = MegogoParser()
-    # data.append(ivi.IviFind(name))
-    # data.append(megogo.MegogoFind(name))
-    print("processing") #
-    i = 0 #
-    for result in results:
-        print(str(i/len(results)*100) + "%") #
-        i += 1 #
-        ia.update(result)
-        movie = {}
-        if 'title' in result.keys():movie['title'] = result['title']
-        if 'rating' in result.keys(): movie['rating'] = result['rating']
-        if 'votes' in result.keys(): movie['votes'] = result['votes']
-        if 'full-size cover url' in result.keys(): movie['image'] = result['full-size cover url']
-        data.append(movie)
 
+    ivi_data = IviParser.IviFind(name)
+    megogo_data = MegogoParser.MegogoFind(name)
+
+    for ivi_film in ivi_data:
+        data.append(ivi_film)
+    for megogo_film in megogo_data:
+        data.append(megogo_film)
     print(data)
 
-    return str(data)
+    return json.dumps(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

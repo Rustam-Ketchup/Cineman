@@ -21,13 +21,15 @@
           class="blog__post post-preview"
           :href="post.link"
         >
-          <div class="post-thumbnail"></div>
+          <img v-if="post.image_url && post.image_url !== '-'" :src="post.image_url" alt="">
+          <div v-else class="post-thumbnail" />
           <div class="post-content">
-            <h1>{{ post.platform }}</h1>
-            <small>{{ post.price }}$</small>
-            <p class="rating">rating: {{ post.rating }}</p>
-            <h3>{{ post.title }}</h3>
-            <p class="description">{{ post.description }}</p>
+            <h1 v-if="post.platform && post.platform !== '-'">{{ post.platform }}</h1>
+            <small v-if="post.price && post.price !== '-'">
+              {{ post.price }}
+            </small>
+            <p v-if="post.rating && post.rating !== '-'" class="rating">rating: {{ post.rating }}</p>
+            <h3 v-if="post.name && post.name !== '-'">{{ post.name }}</h3>
           </div>
         </a>
       </div>

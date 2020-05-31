@@ -17,6 +17,10 @@ const mutations = {
   setSearchResults(state: any, results: Array<any>) {
     state.searchResults = results;
   },
+  setLoading(state: any, loading: Boolean) {
+    state.loading = loading;
+  },
+
 };
 
 export default mutations;

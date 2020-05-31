@@ -62,6 +62,7 @@ const actions = {
     commit('selectFilm', '')
   },
   selectingFilm({commit}: {commit: any}, filmName: string) {
+    commit('setLoading', true);
     commit('selectFilm', filmName);
 
     axios({
@@ -79,6 +80,7 @@ const actions = {
         // commit('setPlatforms', response.data);
         // commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
         console.log(response);
+        commit('setLoading', false)
       })
       .catch((err) => {
         console.log('Error when loading cinema-platforms!');

@@ -7,7 +7,14 @@
       <h1 class="cineman-result__title">You select film: "{{ getFilmSelected }}"</h1>
       <button class="cineman-button" @click="clearFilm">Clear search</button>
 
-      <div class="cineman-wrapper">
+      <img
+        v-if="getLoading"
+        class="img-loading"
+        src="../assets/loading.gif"
+        alt="Loading"
+        title="Wait some time..."
+      >
+      <div class="cineman-wrapper" v-else>
         <a
           v-for="(post, index) in getFilmPlatforms"
           :key="index"
@@ -48,6 +55,7 @@
     @cinemanStore.Action private clearFilm: any;
     @cinemanStore.Getter private getFilmSelected: any;
     @cinemanStore.Getter private getFilmPlatforms: any;
+    @cinemanStore.Getter private getLoading: any;
 
   }
 </script>
@@ -69,6 +77,11 @@
       &__title {
         font-size: 4rem;
         margin-top: 2%;
+      }
+      .img-loading {
+        display: block;
+        text-align: center;
+        margin: 1rem auto;
       }
     }
 

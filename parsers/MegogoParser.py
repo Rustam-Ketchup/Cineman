@@ -8,7 +8,7 @@ def MegogoFind(name):
     print(url)
     response = get(url)
     html_soup = BeautifulSoup(response.text, 'html.parser')
-    movies = html_soup.find_all('div', class_ = 'card-content video-content', limit=2)
+    movies = html_soup.find_all('div', class_= 'card-content video-content', limit=2)
     result = []
 
     for mv in movies:
@@ -20,8 +20,16 @@ def MegogoFind(name):
         if price is None:
             movie_obj['price'] = '-'
         else:
-            movie_obj['price'] = price.text
-        
+            movie_obj['price'] = price.text.strip()
+
+        image = mv_html_soup.find('div', class_='thumb').find("img", recursive=False)
+        if image is None:
+            movie_obj['image_url'] = '-'
+        else:
+            movie_obj['image_url'] = image['src']
+
+        movie_obj['platform'] = 'Megogo'
+
         result.append(movie_obj)
 
     return result

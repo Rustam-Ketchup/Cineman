@@ -62,23 +62,21 @@ const actions = {
     commit('selectFilm', '')
   },
   selectingFilm({commit}: {commit: any}, filmName: string) {
+    commit('setLoading', true);
     commit('selectFilm', filmName);
 
     axios({
       url: `${API_PATH}/get-serch-results/`,
       method: "post",
-      // headers: {
-      //   'Access-Control-Allow-Origin': '*',
-      //   'Content-Type': 'application/json'
-      // },
       data: {
         film: filmName,
       }
     })
       .then((response) => {
-        // commit('setPlatforms', response.data);
+        commit('setPlatforms', response.data);
         // commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
         console.log(response);
+        commit('setLoading', false)
       })
       .catch((err) => {
         console.log('Error when loading cinema-platforms!');

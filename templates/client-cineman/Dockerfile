@@ -4,7 +4,7 @@ FROM node:current-slim
 WORKDIR /usr/src/app
 
 # copy the app, note .dockerignore
-COPY package.json ./
+COPY package.json .
 RUN yarn install
 
 # build necessary, even if no static files are needed,

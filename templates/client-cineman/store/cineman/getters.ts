@@ -18,7 +18,10 @@ const getters = {
     }];
 
     return state.searchResults;
-  }
+  },
+  getLoading(state: any) {
+    return state.loading;
+  },
 };
 
 export default getters;

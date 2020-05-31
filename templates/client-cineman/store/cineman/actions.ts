@@ -68,16 +68,12 @@ const actions = {
     axios({
       url: `${API_PATH}/get-serch-results/`,
       method: "post",
-      // headers: {
-      //   'Access-Control-Allow-Origin': '*',
-      //   'Content-Type': 'application/json'
-      // },
       data: {
         film: filmName,
       }
     })
       .then((response) => {
-        // commit('setPlatforms', response.data);
+        commit('setPlatforms', response.data);
         // commit('setPlatforms', MY_GOOD_PLATFORMS_MOCK);
         console.log(response);
         commit('setLoading', false)

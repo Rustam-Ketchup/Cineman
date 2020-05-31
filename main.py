@@ -5,15 +5,8 @@ import json
 from parsers import IviParser, MegogoParser
 from flask_cors import CORS, cross_origin
 
-config = {
-  'ORIGINS': [
-    'http://localhost:3000',  # Nuxt
-    'http://127.0.0.1:3000',  # Nuxt
-  ],
-}
-
 app = Flask(__name__)
-cors = CORS(app, resources={ r'/*': {'origins': config['ORIGINS']}}, supports_credentials=True)
+CORS(app)
 
 
 @app.route('/', methods=['post', 'get'])
@@ -28,18 +21,27 @@ def index():
     return render_template('index.html', title='', description='', year='', critic='')
 
 
-@app.route('/api/get-search-results/', methods=['post'])
-@cross_origin(origin='localhost',headers=['Content- Type','application/json'])
+@app.route('/api/get-serch-results/', methods=['post', "get", 'options'])
+@cross_origin()
 def api_imdb():
-    name = request.data.film
+    print(request.data)
+    name = json.loads(request.data.decode('utf8').replace("'", '"'))
+    print(name)
+    name = name["film"]
+
+    # name = "matrix"
     ia = IMDb()
     results = ia.search_movie(name)
     data = []
-    ivi = IviParser()
-    megogo = MegogoParser()
-    data.append(ivi.IviFind(name))
-    data.append(megogo.MegogoFind(name))
+    # ivi = IviParser()
+    # megogo = MegogoParser()
+    # data.append(ivi.IviFind(name))
+    # data.append(megogo.MegogoFind(name))
+    print("processing") #
+    i = 0 #
     for result in results:
+        print(str(i/len(results)*100) + "%") #
+        i += 1 #
         ia.update(result)
         movie = {}
         if 'title' in result.keys():movie['title'] = result['title']
@@ -48,7 +50,9 @@ def api_imdb():
         if 'full-size cover url' in result.keys(): movie['image'] = result['full-size cover url']
         data.append(movie)
 
-    return Response(headers={'Access-Control-Allow-Origin':'*', 'Content-Type': 'application/json'}, status=201, data=data)
+    print(data)
+
+    return str(data)
 
 if __name__ == "__main__":
     app.run(debug=True)
